@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dhairya N Panchal — Linux & DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --cream-dark: #EDE6D6;
+    --ink: #1A1814;
+    --ink-soft: #4A4540;
+    --ink-muted: #8A8078;
+    --accent: #C8622A;
+    --accent-light: #F0D9C8;
+    --line: rgba(26,24,20,0.12);
+    --font-serif: 'DM Serif Display', serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-sans: 'Instrument Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent-light); color: var(--ink); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 3rem;
+    background: var(--cream);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex; gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-status {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: #5A8A5A;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-status::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #5A8A5A;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    padding: 5rem 3rem 5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--line);
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  .hero-name {
+    font-family: var(--font-serif);
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-role {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    max-width: 380px;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    background: var(--ink);
+    color: var(--cream);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+
+  .btn-secondary {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { background: var(--ink); color: var(--cream); transform: translateY(-2px); }
+
+  .hero-right {
+    padding: 5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 2.5rem;
+  }
+
+  .hero-stat {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-stat-num {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .hero-stack {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.65rem;
+    background: var(--cream-dark);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+  }
+
+  /* SECTIONS */
+  section { border-top: 1px solid var(--line); }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    height: 1px;
+    background: var(--line);
+    flex: 1;
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    max-width: 600px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+
+  .about-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .principles {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.5rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .principle {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .cert-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cert-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem;
+    background: var(--cream-dark);
+    border: 1px solid var(--line);
+    transition: border-color 0.2s;
+  }
+
+  .cert-item:hover { border-color: var(--accent); }
+
+  .cert-icon {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--accent);
+    width: 2rem;
+    flex-shrink: 0;
+  }
+
+  .cert-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
+  .cert-issuer {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* EXPERIENCE */
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    border-top: 1px solid var(--line);
+    padding: 2.5rem 0;
+    transition: background 0.2s;
+  }
+
+  .exp-item:last-child { border-bottom: 1px solid var(--line); }
+
+  .exp-meta {
+    padding-right: 2rem;
+  }
+
+  .exp-date {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-company {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+
+  .exp-type {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .exp-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--ink-muted);
+  }
+
+  .exp-tags {
+    display: flex; flex-wrap: wrap; gap: 0.35rem;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .project-card {
+    background: var(--cream-dark);
+    border: 1px solid var(--line);
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: border-color 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .project-card:hover::before { transform: scaleX(1); }
+
+  .project-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--ink-muted);
+  }
+
+  .project-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 0.5rem;
+    transition: gap 0.2s;
+  }
+
+  .project-link:hover { gap: 0.75rem; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .skill-group {
+    border-top: 2px solid var(--ink);
+    padding-top: 1.5rem;
+  }
+
+  .skill-group-title {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .skill-list li {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .skill-list li::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* CONTACT */
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .contact-big {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .contact-big em { font-style: italic; color: var(--accent); }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-decoration: none;
+    padding: 1.25rem;
+    border: 1px solid var(--line);
+    background: var(--cream-dark);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .contact-link:hover { border-color: var(--accent); transform: translateX(6px); }
+
+  .contact-link-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .contact-link-val {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer span {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { border-right: none; padding: 3rem 1.5rem; }
+    .hero-right { padding: 2rem 1.5rem; }
+    .section-inner { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-meta { margin-bottom: 0.75rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">DNP</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status">Open to roles</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Linux · DevOps · Cloud</div>
+    <h1 class="hero-name">Dhairya<br/><em>N Panchal.</em></h1>
+    <p class="hero-role">Linux & DevOps engineer building reliable, containerised infrastructure on AWS and Azure. RHCSA certified. Based in Ahmedabad.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#experience" class="btn-secondary">See my work</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-stat">
+      <div class="hero-stat-num">RHCSA</div>
+      <div class="hero-stat-label">Red Hat Certified — System Administration</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">2+</div>
+      <div class="hero-stat-label">Internships — active in 2026</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">B.Sc.</div>
+      <div class="hero-stat-label">Cloud & Application Dev · Gujarat University</div>
+    </div>
+    <div class="hero-stack">
+      <span class="tag">RHEL/Ubuntu</span>
+      <span class="tag">Docker</span>
+      <span class="tag">Podman</span>
+      <span class="tag">AWS</span>
+      <span class="tag">Azure</span>
+      <span class="tag">CI/CD</span>
+      <span class="tag">Bash</span>
+      <span class="tag">Python</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">About</div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>Hey — I'm Dhairya, a <strong>Linux & DevOps engineer</strong> from Ahmedabad. I care about infrastructure automation, containerisation, and building systems that are fast, secure, and maintainable.</p>
+        <p>Currently in Semester 6 of my <strong>B.Sc. IT (Cloud and Application Development)</strong> at Gujarat University. I hold the <strong>RHCSA certification</strong> from Red Hat — a hands-on credential validating real Linux system administration skills.</p>
+        <p>Alongside my studies I've been working at two internships simultaneously, gaining real-world experience in Linux administration and DevOps pipelines.</p>
+        <div class="principles">
+          <div class="principle">/ Automate everything that can be automated</div>
+          <div class="principle">/ Infrastructure is code — treat it that way</div>
+          <div class="principle">/ Security is baked in, not bolted on</div>
+          <div class="principle">/ Logs don't lie — learn to read them</div>
+        </div>
+      </div>
+      <div class="cert-grid reveal">
+        <div class="cert-item">
+          <div class="cert-icon">★</div>
+          <div>
+            <div class="cert-name">RHCSA</div>
+            <div class="cert-issuer">Red Hat Certified System Administrator · Red Hat</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">◈</div>
+          <div>
+            <div class="cert-name">AWS Academy Graduate</div>
+            <div class="cert-issuer">Cloud Foundations · Amazon Web Services</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">◉</div>
+          <div>
+            <div class="cert-name">AWS Basics</div>
+            <div class="cert-issuer">KodeKloud</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">◈</div>
+          <div>
+            <div class="cert-name">Linux For Absolute Beginners</div>
+            <div class="cert-issuer">KodeKloud</div>
+          </div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-icon">◉</div>
+          <div>
+            <div class="cert-name">Practical Intro to Cloud Computing</div>
+            <div class="cert-issuer">EC-Council</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Where I've built things.</h2>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">Mar 2026 — Present</div>
+          <div class="exp-company">Electromech Cloudtech</div>
+          <div class="exp-type">Linux Sys Admin Intern</div>
+        </div>
+        <div>
+          <div class="exp-title">Linux System Administrator Internship</div>
+          <ul class="exp-bullets">
+            <li>Administered multi-user Linux systems — user accounts, file permissions, and group policies.</li>
+            <li>Configured SSH access, firewalls, and networking (OSI, IP routing); performed log analysis and troubleshooting.</li>
+            <li>Deployed web applications on Azure VMs using Podman; configured port mapping and public IP access.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">Linux</span>
+            <span class="tag">SSH</span>
+            <span class="tag">Firewalls</span>
+            <span class="tag">Azure VM</span>
+            <span class="tag">Podman</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">2026 — Present</div>
+          <div class="exp-company">Stellermind.ai</div>
+          <div class="exp-type">DevOps Intern · Remote</div>
+        </div>
+        <div>
+          <div class="exp-title">DevOps Engineer Intern</div>
+          <ul class="exp-bullets">
+            <li>Built and maintained CI/CD pipelines to automate software delivery and deployment end-to-end.</li>
+            <li>Managed containerised environments with Docker and Podman, ensuring consistency across dev and production.</li>
+            <li>Monitored AWS infrastructure (EC2, S3, VPC); assisted in cost optimisation and resource provisioning.</li>
+            <li>Automated routine sysadmin and deployment tasks via Bash scripts, reducing manual overhead.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">Docker</span>
+            <span class="tag">Podman</span>
+            <span class="tag">AWS EC2</span>
+            <span class="tag">CI/CD</span>
+            <span class="tag">Bash</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-date">Sep 2025</div>
+          <div class="exp-company">Electromech Cloudtech</div>
+          <div class="exp-type">Linux Admin Trainee</div>
+        </div>
+        <div>
+          <div class="exp-title">Linux Administrator Trainee</div>
+          <ul class="exp-bullets">
+            <li>Foundational Linux administration — user management, permissions, and group policies.</li>
+            <li>Configured SSH access, firewalls, and OSI networking fundamentals.</li>
+            <li>Deployed containerised apps on Azure VMs with Podman.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">Linux</span>
+            <span class="tag">Azure</span>
+            <span class="tag">Podman</span>
+            <span class="tag">Networking</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">Some things I've built.</h2>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-num">01 · Infrastructure</div>
+        <div class="project-title">Website Hosting via Podman on Azure VM</div>
+        <div class="project-desc">Deployed a containerised static website on Azure VM with public IP access, firewall rules, and NSG configurations. Configured Podman port mapping to expose the app over the internet — simulating a real production deployment.</div>
+        <div class="exp-tags">
+          <span class="tag">Linux</span>
+          <span class="tag">Podman</span>
+          <span class="tag">Azure VM</span>
+          <span class="tag">NSG</span>
+        </div>
+        <a href="https://github.com/dhairyapanchal" class="project-link">View on GitHub →</a>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-num">02 · Full Stack</div>
+        <div class="project-title">Tech-Meet Event Management System</div>
+        <div class="project-desc">Full-stack web platform for college event reviews with CRUD operations, form validation, and relational database design. Clean UI backed by PHP/MySQL powering the entire event management lifecycle.</div>
+        <div class="exp-tags">
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">PHP</span>
+          <span class="tag">MySQL</span>
+        </div>
+        <a href="https://github.com/dhairyapanchal" class="project-link">View on GitHub →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Skills</div>
+    <h2 class="section-title">Tools I use to build.</h2>
+    <div class="skills-grid">
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Cloud & DevOps</div>
+        <ul class="skill-list">
+          <li>AWS EC2 / S3 / VPC</li>
+          <li>Azure VM</li>
+          <li>Docker & Podman</li>
+          <li>CI/CD Pipelines</li>
+          <li>Cloud Computing</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">System Administration</div>
+        <ul class="skill-list">
+          <li>RHEL / Ubuntu</li>
+          <li>User & Group Management</li>
+          <li>SSH & Firewalls</li>
+          <li>System Monitoring</li>
+          <li>Log Analysis</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Scripting & Dev</div>
+        <ul class="skill-list">
+          <li>Bash Shell Scripting</li>
+          <li>Python</li>
+          <li>PHP</li>
+          <li>React.js / JavaScript</li>
+          <li>HTML / CSS</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Databases</div>
+        <ul class="skill-list">
+          <li>MySQL</li>
+          <li>MongoDB</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Networking</div>
+        <ul class="skill-list">
+          <li>OSI Model</li>
+          <li>IP Addressing & Routing</li>
+          <li>Firewall Configuration</li>
+          <li>NSG / Security Groups</li>
+        </ul>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Tools & Version Control</div>
+        <ul class="skill-list">
+          <li>Git & GitHub</li>
+          <li>File Permissions</li>
+          <li>Port Mapping</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" style="padding: 0 3rem; padding-top: 4rem;">Contact</div>
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="contact-big">Let's work<br/><em>together.</em></h2>
+      <p style="margin-top: 1.5rem; color: var(--ink-soft); max-width: 380px; line-height: 1.8;">I'm actively looking for Linux, DevOps, and Cloud roles. If you have an opportunity or just want to talk about infrastructure, reach out.</p>
+    </div>
+    <div class="contact-links reveal">
+      <a href="mailto:panchaldhairya2005@gmail.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-val">panchaldhairya2005@gmail.com</span>
+      </a>
+      <a href="tel:+917016441927" class="contact-link">
+        <span class="contact-link-label">Phone</span>
+        <span class="contact-link-val">+91 70164 41927</span>
+      </a>
+      <a href="https://github.com/dhairyapanchal" target="_blank" class="contact-link">
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-val">github.com/dhairyapanchal</span>
+      </a>
+      <a href="https://linkedin.com/in/dhairyapanchal" target="_blank" class="contact-link">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-val">linkedin.com/in/dhairyapanchal</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Dhairya N Panchal · Ahmedabad, Gujarat</span>
+  <span>Linux & DevOps Engineer</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
